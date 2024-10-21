@@ -6,16 +6,16 @@ export interface ticketTypes {
     purpose: string,
     reasons: string
 }[]
+export const ticketsData: ticketTypes[] = [
+    { id: 1, subject: "to delete account", purpose: "self", reasons: "not_specified" },
+    { id: 2, subject: "to delete account", purpose: "self", reasons: "not_specified" },
+    { id: 3, subject: "to delete account", purpose: "self", reasons: "not_specified" },
+];
 
 @Injectable()
 
 export class TicketsService {
-    tickets: ticketTypes[] = [
-        { id: 1, subject: "to delete account", purpose: "self", reasons: "not_specified" },
-        { id: 2, subject: "to delete account", purpose: "self", reasons: "not_specified" },
-        { id: 3, subject: "to delete account", purpose: "self", reasons: "not_specified" },
-    ]
-
+    tickets: ticketTypes[] = ticketsData
     getAllTicket() {
         return this.tickets
     }

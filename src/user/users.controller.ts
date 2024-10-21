@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post } from "@nestjs/common";
 import { UsersService } from "./users.service";
 
-//https:loaclhost:3000/users will be the route
+//https:loaclhost:3000/users
 @Controller("users")
 export class UserController {
     @Get()
