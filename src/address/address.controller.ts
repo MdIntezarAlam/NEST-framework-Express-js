@@ -29,8 +29,4 @@ export class AddressController {
         addressService.createAddress(newAddress)
         return `tickets created with this id ${newAddress.id}`
     }
-
-    createPost() {
-        return
-    }
 }

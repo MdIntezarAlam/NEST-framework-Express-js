@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post } from "@nestjs/common";
+import { Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { TicketsService, ticketTypes } from "./tickets.service";
 
 
@@ -29,5 +29,9 @@ export class TicketsController {
             console.log("created tickets", ticket)
             return `tickets created with this id ${ticket.id}`
         }
+    }
+    @Put()
+    updateTickets(){
+        
     }
 }

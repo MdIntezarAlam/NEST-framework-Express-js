@@ -1,30 +1,42 @@
-import { Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Patch, Post, Query } from "@nestjs/common";
 import { UsersService } from "./users.service";
+import { CreateUserDto, GetUserParamDto, UpdateUserDto } from "./dtos";
 
 //https:loaclhost:3000/users
 @Controller("users")
 export class UserController {
-    @Get()
-    getUsers() {
-        const usersService = new UsersService()
-        return usersService.getAllUsers()
-    }
 
-    @Post()
-    postUsers() {
-        const user = { id: 1, name: "MIA", email: "mia@gmail.com", password: "12345678", isMarid: false }
-        const usersService = new UsersService()
-        usersService.createUser(user)
-        console.log(user)
-        return "A new user created successfully!"
+    constructor(private usersService: UsersService) { }
+
+
+    @Get(":isMarid?")
+    getUsers(
+        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+        @Query('page', new DefaultValuePipe(10), ParseIntPipe) page: number,
+        @Param() parma: GetUserParamDto
+    ) {
+        console.log(limit, page, parma)
+        return this.usersService.getAllUsers()
     }
 
     //https:localhost:3000/id(5467890)
     @Get(":id/")
-    getusersBuId(@Param('id') id: any) {
-        console.log(id)
-        const usersService = new UsersService()
-        return usersService.getUserById(+id)
-
+    getusersBuId(@Param('id', ParseIntPipe) id: number) {
     }
+
+
+    @Post()
+    createUsers(@Body() user: CreateUserDto) {
+        //this.usersService.createUser(user)
+        console.log(typeof user)
+        console.log(user instanceof CreateUserDto)
+        return "user has been created "
+    }
+
+    @Patch()
+    updateUsers(@Body() user: UpdateUserDto) {
+        console.log(user)
+        return 'user updated successfully ' + user.name
+    }
+
 }
