@@ -10,10 +10,12 @@ export class UserController {
         return usersService.getAllUsers()
     }
 
+    @Post()
     postUsers() {
         const user = { id: 1, name: "MIA", email: "mia@gmail.com", password: "12345678", isMarid: false }
         const usersService = new UsersService()
         usersService.createUser(user)
+        console.log(user)
         return "A new user created successfully!"
     }
 
